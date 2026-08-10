@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGA TVCABO ANGOLA — Jogos de Browser</title>
+<meta name="description" content="10 jogos 100% GRÁTIS, 100% WEB, 100% OPEN SOURCE — Servidores de jogos de browser da AGA TVCABO ANGOLA.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='18' fill='%23ce1126'/><rect y='18' width='32' height='14' fill='%23111'/><circle cx='16' cy='16' r='5' fill='%23f0a500'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #06060e;
+  --surface: #0d0d1f;
+  --surface2: #151530;
+  --border: #1e1e3a;
+  --gold: #f0a500;
+  --gold2: #c78500;
+  --red: #ce1126;
+  --red2: #a00d1c;
+  --green: #00e676;
+  --green2: #00c853;
+  --text: #e2e2f0;
+  --muted: #6a6a9a;
+  --white: #ffffff;
+  --card-hover: 0 8px 40px rgba(240,165,0,0.08);
+  --card-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 600px 400px at 50% -10%, rgba(206,17,38,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 500px at 85% 70%, rgba(240,165,0,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 300px 300px at 15% 30%, rgba(240,165,0,0.04) 0%, transparent 50%);
+  pointer-events:none;z-index:0;
+}
+
+/* Sticky Header */
+.site-header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(6,6,14,0.92);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 1.5rem;
+}
+.header-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  height:60px;
+}
+.brand{
+  font-family:'Orbitron',sans-serif;
+  font-weight:900;font-size:1.2rem;
+  letter-spacing:0.5px;
+}
+.brand .red{color:var(--red)}
+.brand .gold{color:var(--gold)}
+.brand .white{color:var(--white)}
+.header-links{display:flex;align-items:center;gap:1rem}
+.header-links a{
+  color:var(--muted);text-decoration:none;font-size:.82rem;
+  font-weight:500;transition:color .15s;
+  display:flex;align-items:center;gap:5px;
+}
+.header-links a:hover{color:var(--gold)}
+.header-links .discord-link{background:rgba(88,101,242,0.15);color:#7289da;padding:5px 14px;border-radius:20px;font-weight:600}
+.header-links .discord-link:hover{background:rgba(88,101,242,0.25)}
+
+.content{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 1.5rem}
+
+/* Hero */
+.hero{text-align:center;padding:3.5rem 0 2rem}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,rgba(240,165,0,0.15),rgba(206,17,38,0.15));
+  border:1px solid rgba(240,165,0,0.25);
+  color:var(--gold);padding:.4rem 1.2rem;border-radius:30px;font-size:.78rem;
+  font-weight:600;text-transform:uppercase;letter-spacing:2px;margin-bottom:1.2rem;
+}
+.hero-badge .flag{font-size:1rem}
+.hero h1{
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(2rem,5.5vw,3.5rem);font-weight:900;line-height:1.15;
+  letter-spacing:-0.02em;margin-bottom:.6rem;
+}
+.hero h1 .red{color:var(--red)}
+.hero h1 .gold{color:var(--gold)}
+.hero h1 .white{color:var(--white)}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:600px;margin:0 auto;line-height:1.65}
+.hero-stripe{
+  width:60px;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));
+  margin:1.2rem auto;border-radius:2px;
+}
+.hero-tagline{
+  font-size:.85rem;color:var(--muted);font-weight:500;
+  display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;
+}
+.hero-tagline span{color:var(--gold);font-weight:700}
+
+/* Stats bar */
+.stats-bar{
+  display:flex;justify-content:center;gap:2.5rem;margin:1.5rem 0 2.5rem;flex-wrap:wrap;
+}
+.stat-item{text-align:center}
+.stat-num{font-size:2.6rem;font-weight:900;color:var(--white);line-height:1.1;letter-spacing:-0.02em}
+.stat-num.green{color:var(--green)}
+.stat-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:.3rem}
+
+/* Section title */
+.section-title{
+  font-family:'Orbitron',sans-serif;
+  font-size:1.1rem;font-weight:700;color:var(--gold);
+  text-transform:uppercase;letter-spacing:1.5px;
+  margin-bottom:1.25rem;padding-left:.3rem;
+}
+
+/* Game cards */
+.servers{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.25rem;margin-bottom:3rem}
+.card{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:1.5rem;position:relative;overflow:hidden;transition:all .25s;
+  box-shadow:var(--card-shadow);display:flex;flex-direction:column;
+}
+.card:hover{transform:translateY(-3px);border-color:rgba(240,165,0,0.3);box-shadow:var(--card-hover)}
+.card::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;
+  background:linear-gradient(90deg,var(--red),var(--gold));
+}
+.card.coming-soon::before{background:linear-gradient(90deg,#555,#777)}
+
+.card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem}
+.card-game{font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:.45rem}
+.card-icon{font-size:1.5rem;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(240,165,0,0.1)}
+
+.card-genre{font-size:.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:.3rem}
+.card-tech{font-size:.68rem;color:var(--muted);margin-bottom:1rem}
+.card-desc{font-size:.8rem;color:var(--muted);line-height:1.4;margin-bottom:1rem;flex:1}
+
+.card-btn{
+  display:block;text-align:center;background:linear-gradient(135deg,rgba(206,17,38,0.2),rgba(240,165,0,0.15));
+  border:1px solid rgba(240,165,0,0.3);color:var(--gold);padding:.55rem 1rem;
+  border-radius:8px;text-decoration:none;font-weight:700;font-size:.82rem;
+  letter-spacing:0.5px;transition:all .2s;margin-top:auto;
+}
+.card-btn:hover{background:linear-gradient(135deg,rgba(206,17,38,0.35),rgba(240,165,0,0.25));border-color:var(--gold);color:#fff}
+
+.card-btn.soon{
+  background:rgba(255,255,255,0.05);border:1px dashed rgba(255,255,255,0.2);
+  color:var(--muted);cursor:not-allowed;pointer-events:none;
+}
+
+/* Community section */
+.community{text-align:center;padding:3rem 0;border-top:1px solid var(--border);margin-top:1rem}
+.community h3{font-family:'Orbitron',sans-serif;font-weight:700;color:var(--white);margin-bottom:.6rem;font-size:1.2rem}
+.community p{color:var(--muted);font-size:.9rem;margin-bottom:1.5rem}
+.community-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.community-link{
+  display:flex;align-items:center;gap:8px;padding:.6rem 1.4rem;
+  border-radius:12px;text-decoration:none;font-weight:600;font-size:.88rem;
+  transition:all .2s;
+}
+.community-link.discord{background:rgba(88,101,242,0.12);border:1px solid rgba(88,101,242,0.3);color:#7289da}
+.community-link.discord:hover{background:rgba(88,101,242,0.22)}
+.community-link.whatsapp{background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.3);color:#25d366}
+.community-link.whatsapp:hover{background:rgba(37,211,102,0.22)}
+.community-link.telegram{background:rgba(0,136,204,0.12);border:1px solid rgba(0,136,204,0.3);color:#08c}
+.community-link.telegram:hover{background:rgba(0,136,204,0.22)}
+
+/* Footer */
+.footer{
+  text-align:center;padding:2.5rem 0;border-top:1px solid var(--border);
+}
+.footer p{color:var(--muted);font-size:.82rem;line-height:1.8}
+.footer .flag{color:var(--red)}.footer .flag2{color:var(--gold)}
+.footer .highlight{color:var(--gold);font-weight:600}
+
+/* Responsive */
+@media(max-width:640px){
+  .hero{padding:2.5rem 0 1.5rem}
+  .stats-bar{gap:1.5rem}
+  .stat-num{font-size:2rem}
+  .servers{grid-template-columns:1fr}
+  .header-inner{flex-wrap:wrap;height:auto;padding:.7rem 0;gap:.5rem}
+  .header-links{flex-wrap:wrap;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<!-- Sticky Header -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="red">AGA</span>
+      <span class="white"> </span>
+      <span class="gold">TVCABO ANGOLA</span>
+    </div>
+    <div class="header-links">
+      <a href="https://discord.gg/d9MYbnx" target="_blank" rel="noopener" class="discord-link">💬 Discord</a>
+      <a href="https://wa.me/" target="_blank" rel="noopener">📱 WhatsApp</a>
+      <a href="https://t.me/" target="_blank" rel="noopener">✈️ Telegram</a>
+    </div>
+  </div>
+</header>
+
+<div class="content">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">
+      <span class="flag">🇦🇴</span> Comunidade Gaming de Angola
+    </div>
+    <h1>
+      <span class="red">AGA</span>
+      <span class="white"> </span>
+      <span class="gold">TVCABO ANGOLA</span>
+    </h1>
+    <p>Servidores de jogos de browser — 100% gratuitos, 100% web, 100% open source.<br>Junta-te à maior comunidade gamer angolana.</p>
+    <div class="hero-stripe"></div>
+    <div class="hero-tagline">
+      <span>🎮 10 jogos</span> · <span>🌐 100% Web</span> · <span>🔓 Open Source</span> · <span>🆓 Grátis</span>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num green">10+</div><div class="stat-label">Jogadores Conectados</div></div>
+    <div class="stat-item"><div class="stat-num">10</div><div class="stat-label">Jogos</div></div>
+    <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Open Source</div></div>
+    <div class="stat-item"><div class="stat-num">🇦🇴</div><div class="stat-label">Angola</div></div>
+  </div>
+
+  <!-- Game Cards -->
+  <div class="section-title">🎮 Jogos Disponíveis</div>
+  <div class="servers">
+
+    <!-- Age of AI -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-game"><span class="card-icon">🏰</span>Age of AI</div>
+      </div>
+      <div class="card-genre">RTS</div>
+      <div class="card-tech">🟢 Node.js</div>
+      <div class="card-desc">Estratégia em tempo real com inteligência artificial. Constrói, expande e combate.</div>
+      <a href="https://ageofai.aga.org.ao" class="card-btn" target="_blank" rel="noopener">🎮 Jogar Agora</a>
+    </div>
+
+    <!-- Kaetram -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-game"><span class="card-icon">⚔️</span>Kaetram</div>
+      </div>
+      <div class="card-genre">MMORPG</div>
+      <div class="card-tech">🟢 Node.js</div>
+      <div class="card-desc">MMORPG 2D retrô. Explora masmorras, completa quests e luta contra bosses.</div>
+      <a href="https://kaetram.aga.org.ao" class="card-btn" target="_blank" rel="noopener">🎮 Jogar Agora</a>
+    </div>
+
+    <!-- Hypersomnia -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-game"><span class="card-icon">🔫</span>Hypersomnia</div>
+      </div>
+      <div class="card-genre">Top-down Shooter</div>
+      <div class="card-tech">🔵 C++</div>
+      <div class="card-desc">Shooter tático de cima para baixo. Combate intenso com múltiplas armas e modos.</div>
+      <a href="https://hypersomnia.aga.org.ao" class="card-btn" target="_blank" rel="noopener">🎮 Jogar Agora</a>
+    </div>
+
+    <!-- Suroi -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-game"><span class="card-icon">🎯</span>Suroi</div>
+      </div>
+      <div class="card-genre">Battle Royale</div>
+      <div class="card-tech">🟠 Bun</div>
+      <div class="card-desc">Battle royale 2D no browser. Sobrevive, recolhe loot e sê o último sobrevivente.</div>
+      <a href="https://suroi.aga.org.ao" class="card-btn" target="_blank" rel="noopener">🎮 Jogar Agora</a>
+    </div>
+
+    <!-- Lichess -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-game"><span class="card-icon">♟️</span>Lichess</div>
+      </div>
+      <div class="card-genre">Xadrez</div>
+      <div class="card-tech">🔴 Scala</div>
+      <div class="card-desc">O melhor servidor de xadrez livre. Joga partidas rápidas, torneios e puzzles.</div>
+      <a href="https://lichess.aga.org.ao" class="card-btn" target="_blank" rel="noopener">🎮 Jogar Agora</a>
+    </div>
+
+    <!-- Scribble.rs -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-game"><span class="card-icon">✏️</span>Scribble.rs</div>
+      </div>
+      <div class="card-genre">Desenho</div>
+      <div class="card-tech">🟦 Go</div>
+      <div class="card-desc">Jogo de desenhar e adivinhar com amigos. Diversão garantida em grupo.</div>
+      <a href="https://scribble.aga.org.ao" class="card-btn" target="_blank" rel="noopener">🎮 Jogar Agora</a>
+    </div>
+
+    <!-- TOSIOS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-game"><span class="card-icon">🔫</span>TOSIOS</div>
+      </div>
+      <div class="card-genre">Arena Shooter</div>
+      <div class="card-tech">🔷 TypeScript</div>
+      <div class="card-desc">Shooter de arena multijogador. Rápido, competitivo e totalmente no browser.</div>
+      <a href="https://tosios.aga.org.ao" class="card-btn" target="_blank" rel="noopener">🎮 Jogar Agora</a>
+    </div>
+
+    <!-- TravianZ -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-game"><span class="card-icon">🏰</span>TravianZ</div>
+      </div>
+      <div class="card-genre">Estratégia</div>
+      <div class="card-tech">🟣 PHP</div>
+      <div class="card-desc">Constrói o teu império, forma alianças e conquista o mundo. Estratégia clássica.</div>
+      <a href="https://travianz.aga.org.ao" class="card-btn" target="_blank" rel="noopener">🎮 Jogar Agora</a>
+    </div>
+
+    <!-- OGame -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-game"><span class="card-icon">🛸</span>OGame</div>
+      </div>
+      <div class="card-genre">Espaço</div>
+      <div class="card-tech">🟣 PHP</div>
+      <div class="card-desc">Conquista a galáxia. Constrói naves, minera recursos e domina planetas.</div>
+      <a href="https://ogame.aga.org.ao" class="card-btn" target="_blank" rel="noopener">🎮 Jogar Agora</a>
+    </div>
+
+    <!-- World of Claudecraft (Em Breve) -->
+    <div class="card coming-soon">
+      <div class="card-header">
+        <div class="card-game"><span class="card-icon">🏰</span>World of Claudecraft</div>
+      </div>
+      <div class="card-genre">RPG Sandbox</div>
+      <div class="card-tech">🐳 Docker</div>
+      <div class="card-desc">RPG Sandbox massivo. Um mundo vivo para explorar, construir e roleplay.</div>
+      <a href="https://claudecraft.aga.org.ao" class="card-btn soon">🚧 Em Breve</a>
+    </div>
+
+  </div>
+
+  <!-- Community -->
+  <div class="community">
+    <h3>🤝 Junta-te à Comunidade</h3>
+    <p>Conversa com outros jogadores, sugere novos jogos e fica a par das novidades.</p>
+    <div class="community-links">
+      <a href="https://discord.gg/d9MYbnx" target="_blank" rel="noopener" class="community-link discord">💬 Discord</a>
+      <a href="https://wa.me/" target="_blank" rel="noopener" class="community-link whatsapp">📱 WhatsApp</a>
+      <a href="https://t.me/" target="_blank" rel="noopener" class="community-link telegram">✈️ Telegram</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>
+      <span class="flag">🇦</span><span class="flag2">🇴</span>
+      © 2026 AGA TVCABO ANGOLA — Associação de Gamers de Angola. Todos os jogos são open source.
+    </p>
+  </div>
+
+</div>
+
+</body>
+</html>
